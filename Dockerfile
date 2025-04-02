@@ -38,6 +38,13 @@ COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
+# 新しいディレクトリ構造のために必要なファイルをコピー
+# サーバーとクライアントの共有ディレクトリ
+COPY --from=builder /app/src/shared ./src/shared
+
+# エラー対策: .next/server ディレクトリが完全にコピーされていることを確認
+COPY --from=builder /app/.next/server ./.next/server
+
 # アプリケーションを実行
 EXPOSE 3000
 ENV PORT 3000

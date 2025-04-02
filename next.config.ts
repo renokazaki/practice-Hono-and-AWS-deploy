@@ -4,6 +4,15 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["@prisma/client"],
   },
+  // // API リクエストのリライトルール
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/api/:path*",
+  //       destination: "/server/api/:path*",
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;

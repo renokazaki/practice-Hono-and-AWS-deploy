@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import { cors } from "hono/cors";
-import { tasks } from "@/app/lib/db";
+import { tasks } from "../../../server/lib/db";
 
 // Hono アプリケーションのインスタンス化
 const app = new Hono().basePath("/api");

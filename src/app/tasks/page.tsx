@@ -1,12 +1,9 @@
 "use client";
 
-import Alert from "@/components/alert";
-import Layout from "@/components/layout";
-import TaskForm from "@/components/taskform";
-import TaskList from "@/components/taskList";
+import * as Components from "../../client/components/index";
 import { useEffect, useState } from "react";
-import { Task, TaskInput, TaskStatus } from "../types/type";
-import { api } from "../lib/api";
+import { Task, TaskInput, TaskStatus } from "@/src/shared/types/type";
+import { api } from "@/src/client/lib/api";
 
 export default function TasksPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -86,20 +83,20 @@ export default function TasksPage() {
   );
 
   return (
-    <Layout title="タスク管理">
-      <Alert message={error} type="error" />
+    <Components.Layout title="タスク管理">
+      <Components.Alert message={error} type="error" />
 
-      <TaskForm onSubmit={handleCreateTask} />
+      <Components.TaskForm onSubmit={handleCreateTask} />
 
       <div className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-xl font-bold mb-4">タスク一覧</h2>
-        <TaskList
+        <Components.TaskList
           tasks={sortedTasks}
           loading={loading}
           onStatusChange={handleStatusChange}
           onDelete={handleDeleteTask}
         />
       </div>
-    </Layout>
+    </Components.Layout>
   );
 }

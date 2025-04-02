@@ -1,5 +1,5 @@
+import { Task, TaskStatus } from "@/src/shared/types/type";
 import React from "react";
-import { Task, TaskStatus } from "@/app/types/type";
 
 type TaskItemProps = {
   task: Task;

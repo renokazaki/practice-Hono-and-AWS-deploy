@@ -1,4 +1,4 @@
-import { Task, TaskInput, TaskStatus } from "../types/type";
+import { Task, TaskInput, TaskStatus } from "@/src/shared/types/type";
 
 // API エラーハンドリング
 class ApiError extends Error {
@@ -27,24 +27,24 @@ async function handleResponse<T>(response: Response): Promise<T> {
 
   return data as T;
 }
-
+const API_BASE_URL = "/api";
 // API クライアント
 export const api = {
   // タスク一覧の取得
   async getTasks(): Promise<{ tasks: Task[] }> {
-    const response = await fetch("/api/tasks");
+    const response = await fetch(`${API_BASE_URL}/tasks`);
     return handleResponse<{ tasks: Task[] }>(response);
   },
 
   // タスクの詳細取得
   async getTask(id: string): Promise<Task> {
-    const response = await fetch(`/api/tasks/${id}`);
+    const response = await fetch(`${API_BASE_URL}/tasks/${id}`);
     return handleResponse<Task>(response);
   },
 
   // タスクの作成
   async createTask(task: TaskInput): Promise<Task> {
-    const response = await fetch("/api/tasks", {
+    const response = await fetch(`${API_BASE_URL}/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export const api = {
 
   // タスクの更新
   async updateTask(id: string, updates: Partial<TaskInput>): Promise<Task> {
-    const response = await fetch(`/api/tasks/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export const api = {
 
   // タスクの削除
   async deleteTask(id: string): Promise<{ success: boolean }> {
-    const response = await fetch(`/api/tasks/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
       method: "DELETE",
     });
     return handleResponse<{ success: boolean }>(response);
